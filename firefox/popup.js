@@ -109,24 +109,41 @@
     }
   }
 
+  // src/i18n.ts
+  function i18n() {
+    const g = globalThis;
+    return g.browser?.i18n ?? g.chrome?.i18n;
+  }
+  function t(key, ...substitutions) {
+    return i18n()?.getMessage(key, substitutions.map(String)) || key;
+  }
+  function uiLanguage() {
+    return i18n()?.getUILanguage() || "pt-BR";
+  }
+  function formatDate(value) {
+    return new Date(value).toLocaleString(uiLanguage());
+  }
+  function severityName(level) {
+    return t(`sev${level}`);
+  }
+
   // src/core.ts
-  var severity = ["N\xE3o classificado", "Informa\xE7\xE3o", "Aten\xE7\xE3o", "M\xE9dia", "Alta", "Desastre"];
   function config(input) {
-    if (!input || typeof input !== "object") throw new Error("Configura\xE7\xE3o inv\xE1lida.");
+    if (!input || typeof input !== "object") throw new Error(t("errConfigInvalid"));
     const value = input;
-    if (typeof value.url !== "string") throw new Error("Informe a URL do Zabbix.");
-    if (typeof value.token !== "string" || !value.token.trim()) throw new Error("Informe o token de API.");
+    if (typeof value.url !== "string") throw new Error(t("errEnterUrl"));
+    if (typeof value.token !== "string" || !value.token.trim()) throw new Error(t("errEnterToken"));
     const url = new URL(value.url.trim());
     if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash) {
-      throw new Error("Informe uma URL HTTPS, sem credenciais, par\xE2metros ou fragmentos.");
+      throw new Error(t("errUrlRule"));
     }
     const interval = Number(value.interval);
-    if (interval !== 30 && interval !== 45 && interval !== 60) throw new Error("Intervalo inv\xE1lido.");
+    if (interval !== 30 && interval !== 45 && interval !== 60) throw new Error(t("errInterval"));
     url.pathname = url.pathname.replace(/\/(?:api_jsonrpc\.php|index\.php|zabbix\.php)\/?$/, "/").replace(/\/*$/, "/");
     return { url: url.href, token: value.token.trim(), interval, showSuppressed: value.showSuppressed === true, severities: normalizeSeverities(value.severities) };
   }
   function incident(base, problem) {
-    if (!/^\d+$/.test(problem.eventid) || !/^\d+$/.test(problem.objectid)) throw new Error("Incidente inv\xE1lido.");
+    if (!/^\d+$/.test(problem.eventid) || !/^\d+$/.test(problem.objectid)) throw new Error(t("errIncident"));
     const url = new URL("tr_events.php", base);
     url.searchParams.set("triggerid", problem.objectid);
     url.searchParams.set("eventid", problem.eventid);
@@ -135,7 +152,7 @@
   function normalizeSeverities(input) {
     if (input === void 0) return [0, 1, 2, 3, 4, 5];
     if (!Array.isArray(input) || !input.length || !input.every((n) => typeof n === "number" && Number.isInteger(n) && n >= 0 && n <= 5)) {
-      throw new Error("Selecione pelo menos uma severidade v\xE1lida.");
+      throw new Error(t("errSeverities"));
     }
     return [...new Set(input)].sort((a, b) => a - b);
   }
@@ -173,6 +190,16 @@
     }
   }
   mountIcons();
+  document.documentElement.lang = uiLanguage();
+  for (const node of document.querySelectorAll("[data-i18n]")) {
+    node.textContent = t(node.dataset.i18n ?? "", ...node.dataset.i18nArg ? [node.dataset.i18nArg] : []);
+  }
+  for (const attr of ["title", "aria-label"]) {
+    const dataKey = "i18n" + attr.replace(/(^|-)(\w)/g, (_m, _d, c) => c.toUpperCase());
+    for (const node of document.querySelectorAll(`[data-i18n-${attr}]`)) {
+      node.setAttribute(attr, t(node.dataset[dataKey] ?? ""));
+    }
+  }
   var saved;
   var savedControls = {};
   var toolbarBusy = false;
@@ -182,31 +209,31 @@
     savedControls = controls;
     const paused = controls.paused === true;
     const muted = controls.muted === true;
-    const monitoringLabel = paused ? "Iniciar verifica\xE7\xF5es autom\xE1ticas" : "Parar verifica\xE7\xF5es autom\xE1ticas";
+    const monitoringLabel = t(paused ? "monitoringStart" : "monitoringStop");
     $("monitoring").title = monitoringLabel;
     $("monitoring").setAttribute("aria-label", monitoringLabel);
     $("monitoring").setAttribute("aria-pressed", String(!paused));
     $("play-icon").toggleAttribute("hidden", !paused);
     $("stop-icon").toggleAttribute("hidden", paused);
-    const muteLabel = muted ? "Desativar n\xE3o perturbe" : "Ativar n\xE3o perturbe";
+    const muteLabel = t(muted ? "dndOff" : "dndOn");
     $("mute").title = muteLabel;
     $("mute").setAttribute("aria-label", muteLabel);
     $("mute").setAttribute("aria-pressed", String(muted));
     $("bell-icon").toggleAttribute("hidden", muted);
     $("muted-icon").toggleAttribute("hidden", !muted);
     $("mode-status").textContent = !config2 ? "" : [
-      paused ? "Verifica\xE7\xF5es autom\xE1ticas pausadas" : "Verifica\xE7\xF5es autom\xE1ticas ativas",
-      ...muted ? ["N\xE3o perturbe ativo"] : []
+      t(paused ? "modePaused" : "modeActive"),
+      ...muted ? [t("dndActive")] : []
     ].join(" \xB7 ");
     for (const id of ["monitoring", "refresh", "mute"]) $(id).disabled = !config2 || toolbarBusy;
     $("count").textContent = String(state.rows?.length ?? 0);
-    $("status").textContent = state.error ? `Falha na consulta: ${state.error}. A lista pode estar desatualizada.` : state.checkedAt ? `\xDAltima consulta: ${new Date(state.checkedAt).toLocaleString("pt-BR")}` : "Configure sua conex\xE3o para come\xE7ar.";
+    $("status").textContent = state.error ? t("statusFail", state.error) : state.checkedAt ? t("statusLast", formatDate(state.checkedAt)) : t("statusInitial");
     $("disconnect").disabled = !config2;
     $("problems").replaceChildren();
     if (!state.rows?.length) {
       const empty = document.createElement("p");
       empty.className = "empty";
-      empty.textContent = config2 ? "Nenhum problema ativo na \xFAltima consulta." : "Seus alarmes aparecer\xE3o aqui.";
+      empty.textContent = t(config2 ? "emptyConfigured" : "emptyUnconfigured");
       $("problems").append(empty);
     }
     for (const p of state.rows || []) {
@@ -217,18 +244,18 @@
       a.target = "_blank";
       a.rel = "noopener noreferrer";
       const host = document.createElement("strong");
-      host.textContent = p.host || "Host indispon\xEDvel";
+      host.textContent = p.host || t("hostUnavailable");
       const name = document.createElement("span");
       name.textContent = p.name;
       const detail = document.createElement("small");
-      detail.textContent = `${severity[Number(p.severity)]} \xB7 ${new Date(Number(p.clock) * 1e3).toLocaleString("pt-BR")} \xB7 ${p.acknowledged === "1" ? "Reconhecido" : "N\xE3o reconhecido"}${p.suppressed === "1" ? " \xB7 Suprimido" : ""}`;
+      detail.textContent = `${severityName(Number(p.severity))} \xB7 ${formatDate(Number(p.clock) * 1e3)} \xB7 ${t(p.acknowledged === "1" ? "acked" : "notAcked")}${p.suppressed === "1" ? " \xB7 " + t("suppressed") : ""}`;
       a.append(host, name, detail);
       $("problems").append(a);
     }
   }
   async function send(message) {
     const reply = await api.runtime.sendMessage(message);
-    if (!reply) throw new Error("N\xE3o foi poss\xEDvel executar a opera\xE7\xE3o.");
+    if (!reply) throw new Error(t("errOpFailed"));
     if (!reply.ok) throw new Error(reply.error);
     await render();
   }
@@ -240,8 +267,8 @@
     try {
       const config2 = config({ url: $("url").value, token: $("token").value, interval: $("interval").value, showSuppressed: $("show-suppressed").checked, severities: selectedSeverities() });
       const granted = await api.permissions.request({ origins: [new URL(config2.url).origin + "/*"] });
-      if (!granted) throw new Error("Permiss\xE3o de acesso ao Zabbix n\xE3o concedida.");
-      $("status").textContent = "Testando conex\xE3o\u2026";
+      if (!granted) throw new Error(t("errPermission"));
+      $("status").textContent = t("testing");
       await send({ type: "save", config: config2 });
       $("token").value = "";
       setConnectionOpen(false);
@@ -263,25 +290,25 @@
       return;
     }
     if (!saved) {
-      $("filter-status").textContent = "Os filtros ser\xE3o salvos ao configurar a conex\xE3o.";
+      $("filter-status").textContent = t("filtersWillSave");
       return;
     }
     const revision = ++filterRevision;
-    $("filter-status").textContent = "Salvando filtros\u2026";
+    $("filter-status").textContent = t("savingFilters");
     try {
       const reply = await api.runtime.sendMessage({
         type: "preferences",
         showSuppressed: $("show-suppressed").checked,
         severities
       });
-      if (!reply) throw new Error("N\xE3o foi poss\xEDvel salvar os filtros.");
+      if (!reply) throw new Error(t("errFiltersNoReply"));
       if (!reply.ok) throw new Error(reply.error);
       if (revision !== filterRevision) return;
       await render();
-      $("filter-status").textContent = "Filtros salvos automaticamente.";
+      $("filter-status").textContent = t("filtersSaved");
     } catch (error) {
       if (revision === filterRevision) {
-        $("filter-status").textContent = "Filtros n\xE3o salvos: " + errorMessage(error);
+        $("filter-status").textContent = t("filtersNotSaved", errorMessage(error));
       }
     }
   }

@@ -24,26 +24,35 @@ var Zabbix = (() => {
   __export(core_exports, {
     config: () => config,
     incident: () => incident,
-    normalizeSeverities: () => normalizeSeverities,
-    severity: () => severity
+    normalizeSeverities: () => normalizeSeverities
   });
-  var severity = ["N\xE3o classificado", "Informa\xE7\xE3o", "Aten\xE7\xE3o", "M\xE9dia", "Alta", "Desastre"];
+
+  // src/i18n.ts
+  function i18n() {
+    const g = globalThis;
+    return g.browser?.i18n ?? g.chrome?.i18n;
+  }
+  function t(key, ...substitutions) {
+    return i18n()?.getMessage(key, substitutions.map(String)) || key;
+  }
+
+  // src/core.ts
   function config(input) {
-    if (!input || typeof input !== "object") throw new Error("Configura\xE7\xE3o inv\xE1lida.");
+    if (!input || typeof input !== "object") throw new Error(t("errConfigInvalid"));
     const value = input;
-    if (typeof value.url !== "string") throw new Error("Informe a URL do Zabbix.");
-    if (typeof value.token !== "string" || !value.token.trim()) throw new Error("Informe o token de API.");
+    if (typeof value.url !== "string") throw new Error(t("errEnterUrl"));
+    if (typeof value.token !== "string" || !value.token.trim()) throw new Error(t("errEnterToken"));
     const url = new URL(value.url.trim());
     if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash) {
-      throw new Error("Informe uma URL HTTPS, sem credenciais, par\xE2metros ou fragmentos.");
+      throw new Error(t("errUrlRule"));
     }
     const interval = Number(value.interval);
-    if (interval !== 30 && interval !== 45 && interval !== 60) throw new Error("Intervalo inv\xE1lido.");
+    if (interval !== 30 && interval !== 45 && interval !== 60) throw new Error(t("errInterval"));
     url.pathname = url.pathname.replace(/\/(?:api_jsonrpc\.php|index\.php|zabbix\.php)\/?$/, "/").replace(/\/*$/, "/");
     return { url: url.href, token: value.token.trim(), interval, showSuppressed: value.showSuppressed === true, severities: normalizeSeverities(value.severities) };
   }
   function incident(base, problem) {
-    if (!/^\d+$/.test(problem.eventid) || !/^\d+$/.test(problem.objectid)) throw new Error("Incidente inv\xE1lido.");
+    if (!/^\d+$/.test(problem.eventid) || !/^\d+$/.test(problem.objectid)) throw new Error(t("errIncident"));
     const url = new URL("tr_events.php", base);
     url.searchParams.set("triggerid", problem.objectid);
     url.searchParams.set("eventid", problem.eventid);
@@ -52,7 +61,7 @@ var Zabbix = (() => {
   function normalizeSeverities(input) {
     if (input === void 0) return [0, 1, 2, 3, 4, 5];
     if (!Array.isArray(input) || !input.length || !input.every((n) => typeof n === "number" && Number.isInteger(n) && n >= 0 && n <= 5)) {
-      throw new Error("Selecione pelo menos uma severidade v\xE1lida.");
+      throw new Error(t("errSeverities"));
     }
     return [...new Set(input)].sort((a, b) => a - b);
   }
