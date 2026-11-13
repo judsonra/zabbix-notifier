@@ -102,3 +102,9 @@ To generate into a new directory without replacing existing packages, use `pytho
 Run `npm test` to test configuration, links, polling, the suppressed filter, pause, Do Not Disturb, deduplication and network failures with simulated APIs. The old command `node test-notifier.cjs` also forwards to that suite. These tests do not replace validation in a real browser and against a real server.
 
 Documentation: [Zabbix 7.0 API](https://www.zabbix.com/documentation/7.0/en/manual/api), [Chrome alarms](https://developer.chrome.com/docs/extensions/reference/api/alarms), [Chrome/Firefox background](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/background).
+
+## License
+
+Released under the [MIT License](LICENSE). The Lucide icons are distributed under their own licenses (ISC and MIT), in [LICENSE-lucide.txt](LICENSE-lucide.txt).
+
+Zabbix Notifier is an independent project, not affiliated with or endorsed by Zabbix SIA. Zabbix is a registered trademark of Zabbix SIA.

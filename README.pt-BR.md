@@ -102,3 +102,9 @@ Para gerar em um diretório novo sem substituir pacotes existentes, use `python3
 Execute `npm test` para testar configuração, links, polling, filtro de suprimidos, pausa, não perturbe, deduplicação e falhas de rede com APIs simuladas. O comando antigo `node test-notifier.cjs` também encaminha para essa suíte. Esses testes não substituem a validação no navegador e no servidor real.
 
 Documentação: [API Zabbix 7.0](https://www.zabbix.com/documentation/7.0/en/manual/api), [agendamento Chrome](https://developer.chrome.com/docs/extensions/reference/api/alarms), [background Chrome/Firefox](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/background).
+
+## Licença
+
+Distribuído sob a [Licença MIT](LICENSE). Os ícones Lucide são distribuídos sob suas próprias licenças (ISC e MIT), em [LICENSE-lucide.txt](LICENSE-lucide.txt).
+
+O Zabbix Notifier é um projeto independente, não afiliado nem endossado pela Zabbix SIA. Zabbix é marca registrada da Zabbix SIA.
