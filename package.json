@@ -1,0 +1,24 @@
+{
+  "devDependencies": {
+    "@types/chrome": "0.3.7",
+    "@types/node": "26.6.6",
+    "esbuild": "0.28.2",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  },
+  "name": "zabbix-notifier",
+  "version": "1.0.6",
+  "private": true,
+  "type": "module",
+  "description": "Extensão de notificações Zabbix em TypeScript",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && tsx scripts/build.ts",
+    "test": "npm run build && tsx --test tests/*.test.ts",
+    "check": "npm run typecheck",
+    "package:extensions": "npm run build && python3 build-extension.py --browsers chrome firefox opera vivaldi brave --output-dir releases/1.0.6"
+  },
+  "dependencies": {
+    "lucide": "1.72.0"
+  }
+}

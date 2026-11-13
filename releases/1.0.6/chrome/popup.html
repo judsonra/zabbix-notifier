@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zabbix Notifier</title>
+<link rel="stylesheet" href="notifier.css">
+<header><div><small data-i18n="popupSubtitle"></small><h1>Zabbix Notifier</h1></div><span id="count">—</span></header>
+<main>
+  <p id="status" role="status" data-i18n="statusInitial"></p>
+  <div class="toolbar" role="toolbar" data-i18n-aria-label="toolbarLabel">
+    <button id="monitoring" class="icon-button" type="button" data-i18n-title="monitoringStop" data-i18n-aria-label="monitoringStop" aria-pressed="true" disabled><span class="icon-slot" id="play-icon" hidden></span><span class="icon-slot" id="stop-icon"></span></button>
+    <button id="refresh" class="icon-button" type="button" data-i18n-title="refreshNow" data-i18n-aria-label="refreshNow" disabled><span class="icon-slot" id="refresh-icon"></span></button>
+    <button id="mute" class="icon-button" type="button" data-i18n-title="dndOn" data-i18n-aria-label="dndOn" aria-pressed="false" disabled><span class="icon-slot" id="bell-icon"></span><span class="icon-slot" id="muted-icon" hidden></span></button>
+    <button id="settings" class="icon-button" type="button" data-i18n-title="settings" data-i18n-aria-label="settings" aria-expanded="true" aria-controls="connection"><span class="icon-slot" id="settings-icon"></span></button>
+  </div>
+  <p id="mode-status" role="status"></p>
+  <section id="connection">
+    <form id="form">
+      <label><span data-i18n="labelUrl"></span><input id="url" type="url" required autocomplete="off"></label>
+      <label><span data-i18n="labelToken"></span><input id="token" type="password" required autocomplete="off"></label>
+      <label><span data-i18n="labelInterval"></span><select id="interval"><option value="30" data-i18n="intervalSeconds" data-i18n-arg="30"></option><option value="45" data-i18n="intervalSeconds" data-i18n-arg="45"></option><option value="60" data-i18n="intervalSeconds" data-i18n-arg="60"></option></select></label>
+      <fieldset class="severity-filter"><legend data-i18n="legendSeverities"></legend>
+        <div class="severity-options">
+          <label class="checkbox"><input type="checkbox" name="severity" value="0" checked><span data-i18n="sev0"></span></label>
+          <label class="checkbox"><input type="checkbox" name="severity" value="1" checked><span data-i18n="sev1"></span></label>
+          <label class="checkbox"><input type="checkbox" name="severity" value="2" checked><span data-i18n="sev2"></span></label>
+          <label class="checkbox"><input type="checkbox" name="severity" value="3" checked><span data-i18n="sev3"></span></label>
+          <label class="checkbox"><input type="checkbox" name="severity" value="4" checked><span data-i18n="sev4"></span></label>
+          <label class="checkbox"><input type="checkbox" name="severity" value="5" checked><span data-i18n="sev5"></span></label>
+        </div>
+        <p class="hint" data-i18n="hintSeverities"></p>
+      </fieldset>
+      <label class="checkbox"><input id="show-suppressed" type="checkbox"><span data-i18n="showSuppressed"></span></label>
+      <p class="hint" data-i18n="hintSuppressed"></p>
+      <p id="filter-status" class="hint" role="status" data-i18n="filtersAutoSaved"></p>
+      <p class="hint" data-i18n="hintSecurity"></p>
+      <button type="submit" data-i18n="btnSave"></button><button id="disconnect" type="button" data-i18n="btnDisconnect"></button>
+    </form>
+  </section>
+  <section data-i18n-aria-label="sectionProblems"><div id="problems"></div></section>
+</main>
+<script src="core.js"></script><script src="popup.js"></script>
+</html>

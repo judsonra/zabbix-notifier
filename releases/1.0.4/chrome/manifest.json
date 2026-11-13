@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Zabbix Notifier",
+  "version": "1.0.4",
+  "description": "Notificações de problemas do Zabbix 7.0 com URL e token configuráveis.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "optional_host_permissions": [
+    "https://*/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "minimum_chrome_version": "120",
+  "background": {
+    "service_worker": "background.js"
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "extName": {
+    "message": "Zabbix Notifier"
+  },
+  "extDescription": {
+    "message": "Notificaciones de problemas de Zabbix 7.0 con URL y token configurables."
+  },
+  "popupSubtitle": {
+    "message": "MONITOREO DE RED"
+  },
+  "statusInitial": {
+    "message": "Configure su conexión para comenzar."
+  },
+  "toolbarLabel": {
+    "message": "Controles de monitoreo"
+  },
+  "monitoringStop": {
+    "message": "Detener verificaciones automáticas"
+  },
+  "monitoringStart": {
+    "message": "Iniciar verificaciones automáticas"
+  },
+  "refreshNow": {
+    "message": "Actualizar ahora"
+  },
+  "dndOn": {
+    "message": "Activar no molestar"
+  },
+  "dndOff": {
+    "message": "Desactivar no molestar"
+  },
+  "settings": {
+    "message": "Configuración"
+  },
+  "labelUrl": {
+    "message": "URL de Zabbix"
+  },
+  "labelToken": {
+    "message": "Token de API"
+  },
+  "labelInterval": {
+    "message": "Intervalo de consulta"
+  },
+  "intervalSeconds": {
+    "message": "$ARG1$ segundos",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "legendSeverities": {
+    "message": "Severidades de los problemas"
+  },
+  "sev0": {
+    "message": "No clasificado"
+  },
+  "sev1": {
+    "message": "Información"
+  },
+  "sev2": {
+    "message": "Advertencia"
+  },
+  "sev3": {
+    "message": "Media"
+  },
+  "sev4": {
+    "message": "Alta"
+  },
+  "sev5": {
+    "message": "Desastre"
+  },
+  "hintSeverities": {
+    "message": "Seleccione al menos una. El filtro se aplica a la lista, al contador y a las notificaciones."
+  },
+  "showSuppressed": {
+    "message": "Mostrar problemas suprimidos"
+  },
+  "hintSuppressed": {
+    "message": "Desactivado por defecto. Al activarlo, los problemas suprimidos también aparecen en la lista, el contador y las notificaciones."
+  },
+  "filtersAutoSaved": {
+    "message": "Los filtros se guardan automáticamente al cambiarlos."
+  },
+  "hintSecurity": {
+    "message": "Use HTTPS. El token se guarda solo en este navegador, sin sincronización. La programación puede retrasarse cuando el equipo esté suspendido o el navegador limite las tareas."
+  },
+  "btnSave": {
+    "message": "Probar y guardar conexión"
+  },
+  "btnDisconnect": {
+    "message": "Desconectar y borrar token"
+  },
+  "sectionProblems": {
+    "message": "Problemas activos"
+  },
+  "modePaused": {
+    "message": "Verificaciones automáticas en pausa"
+  },
+  "modeActive": {
+    "message": "Verificaciones automáticas activas"
+  },
+  "dndActive": {
+    "message": "No molestar activo"
+  },
+  "statusFail": {
+    "message": "Error en la consulta: $ARG1$. La lista puede estar desactualizada.",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "statusLast": {
+    "message": "Última consulta: $ARG1$",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "hostUnavailable": {
+    "message": "Host no disponible"
+  },
+  "emptyConfigured": {
+    "message": "Ningún problema activo en la última consulta."
+  },
+  "emptyUnconfigured": {
+    "message": "Sus alarmas aparecerán aquí."
+  },
+  "acked": {
+    "message": "Reconocido"
+  },
+  "notAcked": {
+    "message": "No reconocido"
+  },
+  "suppressed": {
+    "message": "Suprimido"
+  },
+  "errOpFailed": {
+    "message": "No se pudo ejecutar la operación."
+  },
+  "errPermission": {
+    "message": "No se concedió el permiso de acceso a Zabbix."
+  },
+  "testing": {
+    "message": "Probando conexión…"
+  },
+  "filtersWillSave": {
+    "message": "Los filtros se guardarán al configurar la conexión."
+  },
+  "savingFilters": {
+    "message": "Guardando filtros…"
+  },
+  "errFiltersNoReply": {
+    "message": "No se pudieron guardar los filtros."
+  },
+  "filtersSaved": {
+    "message": "Filtros guardados automáticamente."
+  },
+  "filtersNotSaved": {
+    "message": "Filtros no guardados: $ARG1$",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "errHttp": {
+    "message": "Zabbix respondió con HTTP $ARG1$.",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "errInvalidResponse": {
+    "message": "Respuesta no válida. Compruebe la URL y el acceso a la API."
+  },
+  "errApi": {
+    "message": "API de Zabbix: $ARG1$ $ARG2$",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      },
+      "arg2": {
+        "content": "$2"
+      }
+    }
+  },
+  "errUnexpected": {
+    "message": "Respuesta inesperada de la API."
+  },
+  "notifSingle": {
+    "message": "$ARG1$: $ARG2$",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      },
+      "arg2": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifManyTitle": {
+    "message": "$ARG1$ problemas nuevos en Zabbix",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifManyBody": {
+    "message": "$ARG1$: $ARG2$\nAbra la extensión para verlos todos.",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      },
+      "arg2": {
+        "content": "$2"
+      }
+    }
+  },
+  "errInvalidMessage": {
+    "message": "Mensaje no válido."
+  },
+  "errAuthorize": {
+    "message": "Autorice el acceso al servidor Zabbix."
+  },
+  "errInvalidPref": {
+    "message": "Preferencia no válida."
+  },
+  "errConfigFirst": {
+    "message": "Configure primero su conexión."
+  },
+  "errInvalidControl": {
+    "message": "Control no válido."
+  },
+  "errUnknownOp": {
+    "message": "Operación desconocida."
+  },
+  "errConfigInvalid": {
+    "message": "Configuración no válida."
+  },
+  "errEnterUrl": {
+    "message": "Indique la URL de Zabbix."
+  },
+  "errEnterToken": {
+    "message": "Indique el token de API."
+  },
+  "errUrlRule": {
+    "message": "Indique una URL HTTPS sin credenciales, parámetros ni fragmentos."
+  },
+  "errInterval": {
+    "message": "Intervalo no válido."
+  },
+  "errIncident": {
+    "message": "Incidente no válido."
+  },
+  "errSeverities": {
+    "message": "Seleccione al menos una severidad válida."
+  }
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zabbix Notifier</title>
+<link rel="stylesheet" href="notifier.css">
+<header><div><small>MONITORAMENTO DE REDE</small><h1>Zabbix Notifier</h1></div><span id="count">—</span></header>
+<main>
+  <p id="status" role="status">Configure sua conexão para começar.</p>
+  <div class="toolbar" role="toolbar" aria-label="Controles do monitoramento">
+    <button id="monitoring" class="icon-button" type="button" title="Parar verificações automáticas" aria-label="Parar verificações automáticas" aria-pressed="true" disabled><svg viewBox="0 0 24 24" aria-hidden="true" id="play-icon" hidden><path d="m8 5 11 7-11 7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" id="stop-icon"><rect x="6" y="6" width="12" height="12" rx="1"/></svg></button>
+    <button id="refresh" class="icon-button" type="button" title="Atualizar agora" aria-label="Atualizar agora" disabled><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="M20 7v5h-5"/><path d="M20 12a8 8 0 1 1-2.34-5.66L20 9"/></svg></button>
+    <button id="mute" class="icon-button" type="button" title="Ativar não perturbe" aria-label="Ativar não perturbe" aria-pressed="false" disabled><svg viewBox="0 0 24 24" aria-hidden="true" id="bell-icon"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" id="muted-icon" hidden><path d="m3 3 18 18M9 3.8A6 6 0 0 1 18 9v3M6 6a6 6 0 0 0 0 3c0 5-3 6-3 8h14M10 21h4"/></svg></button>
+    <button id="settings" class="icon-button" type="button" title="Configurações" aria-label="Configurações" aria-expanded="true" aria-controls="connection"><svg viewBox="0 0 24 24" aria-hidden="true" ><path d="m9.5 3-.7 2.4-2 .9-2.2-.6-2.5 4.3 1.6 1.8v2.4L2.1 16l2.5 4.3 2.2-.6 2 .9.7 2.4h5l.7-2.4 2-.9 2.2.6 2.5-4.3-1.6-1.8v-2.4l1.6-1.8-2.5-4.3-2.2.6-2-.9L14.5 3z" transform="translate(0 -1) scale(1 .92)"/><circle cx="12" cy="11" r="3"/></svg></button>
+  </div>
+  <p id="mode-status" role="status"></p>
+  <section id="connection">
+    <form id="form">
+      <label>URL do Zabbix<input id="url" type="url" required autocomplete="off" aria-label="URL do Zabbix"></label>
+      <label>Token de API<input id="token" type="password" required autocomplete="off"></label>
+      <label>Intervalo de consulta<select id="interval"><option value="30">30 segundos</option><option value="45">45 segundos</option><option value="60">60 segundos</option></select></label>
+      <label class="checkbox"><input id="show-suppressed" type="checkbox">Exibir problemas suprimidos</label>
+      <p class="hint">Desativado por padrão. Ao ativar, problemas suprimidos também entram na lista, no contador e nas notificações.</p>
+      <button id="save-preferences" type="button" disabled>Salvar filtro de problemas</button>
+      <p class="hint">Use HTTPS. O token será salvo somente neste navegador, sem sincronização. O agendamento pode sofrer atrasos quando o computador estiver suspenso ou o navegador limitar tarefas.</p>
+      <button type="submit">Testar e salvar conexão</button><button id="disconnect" type="button">Desconectar e apagar token</button>
+    </form>
+  </section>
+  <section aria-label="Problemas ativos"><div id="problems"></div></section>
+</main>
+<script src="core.js"></script><script src="popup.js"></script>
+</html>

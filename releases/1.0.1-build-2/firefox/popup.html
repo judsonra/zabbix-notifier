@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zabbix Notifier</title>
+<link rel="stylesheet" href="notifier.css">
+<header><div><small>MONITORAMENTO DE REDE</small><h1>Zabbix Notifier</h1></div><span id="count">—</span></header>
+<main>
+  <p id="status" role="status">Configure sua conexão para começar.</p>
+  <div class="toolbar"><button id="refresh" type="button">Atualizar agora</button><button id="settings" type="button">Configurações</button></div>
+  <section id="connection">
+    <form id="form">
+      <label>URL do Zabbix<input id="url" type="url" required autocomplete="off" aria-label="URL do Zabbix"></label>
+      <label>Token de API<input id="token" type="password" required autocomplete="off"></label>
+      <label>Intervalo de consulta<select id="interval"><option value="30">30 segundos</option><option value="45">45 segundos</option><option value="60">60 segundos</option></select></label>
+      <label class="checkbox"><input id="show-suppressed" type="checkbox">Exibir problemas suprimidos</label>
+      <p class="hint">Desativado por padrão. Ao ativar, problemas suprimidos também entram na lista, no contador e nas notificações.</p>
+      <button id="save-preferences" type="button" disabled>Salvar filtro de problemas</button>
+      <p class="hint">Use HTTPS. O token será salvo somente neste navegador, sem sincronização. O agendamento pode sofrer atrasos quando o computador estiver suspenso ou o navegador limitar tarefas.</p>
+      <button type="submit">Testar e salvar conexão</button><button id="disconnect" type="button">Desconectar e apagar token</button>
+    </form>
+  </section>
+  <section aria-label="Problemas ativos"><div id="problems"></div></section>
+</main>
+<script src="core.js"></script><script src="popup.js"></script>
+</html>

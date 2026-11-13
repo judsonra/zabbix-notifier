@@ -1,0 +1,263 @@
+{
+  "extName": {
+    "message": "Zabbix Notifier"
+  },
+  "extDescription": {
+    "message": "Notificações de problemas do Zabbix 7.0 com URL e token configuráveis."
+  },
+  "popupSubtitle": {
+    "message": "MONITORAMENTO DE REDE"
+  },
+  "statusInitial": {
+    "message": "Configure sua conexão para começar."
+  },
+  "toolbarLabel": {
+    "message": "Controles do monitoramento"
+  },
+  "monitoringStop": {
+    "message": "Parar verificações automáticas"
+  },
+  "monitoringStart": {
+    "message": "Iniciar verificações automáticas"
+  },
+  "refreshNow": {
+    "message": "Atualizar agora"
+  },
+  "dndOn": {
+    "message": "Ativar não perturbe"
+  },
+  "dndOff": {
+    "message": "Desativar não perturbe"
+  },
+  "settings": {
+    "message": "Configurações"
+  },
+  "labelUrl": {
+    "message": "URL do Zabbix"
+  },
+  "labelToken": {
+    "message": "Token de API"
+  },
+  "labelInterval": {
+    "message": "Intervalo de consulta"
+  },
+  "intervalSeconds": {
+    "message": "$ARG1$ segundos",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "legendSeverities": {
+    "message": "Severidades dos problemas"
+  },
+  "sev0": {
+    "message": "Não classificado"
+  },
+  "sev1": {
+    "message": "Informação"
+  },
+  "sev2": {
+    "message": "Atenção"
+  },
+  "sev3": {
+    "message": "Média"
+  },
+  "sev4": {
+    "message": "Alta"
+  },
+  "sev5": {
+    "message": "Desastre"
+  },
+  "hintSeverities": {
+    "message": "Selecione ao menos uma. O filtro vale para a lista, o contador e as notificações."
+  },
+  "showSuppressed": {
+    "message": "Exibir problemas suprimidos"
+  },
+  "hintSuppressed": {
+    "message": "Desativado por padrão. Ao ativar, problemas suprimidos também entram na lista, no contador e nas notificações."
+  },
+  "filtersAutoSaved": {
+    "message": "Filtros salvos automaticamente ao alterar."
+  },
+  "hintSecurity": {
+    "message": "Use HTTPS. O token será salvo somente neste navegador, sem sincronização. O agendamento pode sofrer atrasos quando o computador estiver suspenso ou o navegador limitar tarefas."
+  },
+  "btnSave": {
+    "message": "Testar e salvar conexão"
+  },
+  "btnDisconnect": {
+    "message": "Desconectar e apagar token"
+  },
+  "sectionProblems": {
+    "message": "Problemas ativos"
+  },
+  "modePaused": {
+    "message": "Verificações automáticas pausadas"
+  },
+  "modeActive": {
+    "message": "Verificações automáticas ativas"
+  },
+  "dndActive": {
+    "message": "Não perturbe ativo"
+  },
+  "statusFail": {
+    "message": "Falha na consulta: $ARG1$. A lista pode estar desatualizada.",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "statusLast": {
+    "message": "Última consulta: $ARG1$",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "hostUnavailable": {
+    "message": "Host indisponível"
+  },
+  "emptyConfigured": {
+    "message": "Nenhum problema ativo na última consulta."
+  },
+  "emptyUnconfigured": {
+    "message": "Seus alarmes aparecerão aqui."
+  },
+  "acked": {
+    "message": "Reconhecido"
+  },
+  "notAcked": {
+    "message": "Não reconhecido"
+  },
+  "suppressed": {
+    "message": "Suprimido"
+  },
+  "errOpFailed": {
+    "message": "Não foi possível executar a operação."
+  },
+  "errPermission": {
+    "message": "Permissão de acesso ao Zabbix não concedida."
+  },
+  "testing": {
+    "message": "Testando conexão…"
+  },
+  "filtersWillSave": {
+    "message": "Os filtros serão salvos ao configurar a conexão."
+  },
+  "savingFilters": {
+    "message": "Salvando filtros…"
+  },
+  "errFiltersNoReply": {
+    "message": "Não foi possível salvar os filtros."
+  },
+  "filtersSaved": {
+    "message": "Filtros salvos automaticamente."
+  },
+  "filtersNotSaved": {
+    "message": "Filtros não salvos: $ARG1$",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "errHttp": {
+    "message": "Zabbix respondeu HTTP $ARG1$.",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "errInvalidResponse": {
+    "message": "Resposta inválida. Confira a URL e o acesso à API."
+  },
+  "errApi": {
+    "message": "API Zabbix: $ARG1$ $ARG2$",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      },
+      "arg2": {
+        "content": "$2"
+      }
+    }
+  },
+  "errUnexpected": {
+    "message": "Resposta inesperada da API."
+  },
+  "notifSingle": {
+    "message": "$ARG1$: $ARG2$",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      },
+      "arg2": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifManyTitle": {
+    "message": "$ARG1$ novos problemas no Zabbix",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifManyBody": {
+    "message": "$ARG1$: $ARG2$\nAbra a extensão para ver todos.",
+    "placeholders": {
+      "arg1": {
+        "content": "$1"
+      },
+      "arg2": {
+        "content": "$2"
+      }
+    }
+  },
+  "errInvalidMessage": {
+    "message": "Mensagem inválida."
+  },
+  "errAuthorize": {
+    "message": "Autorize o acesso ao servidor Zabbix."
+  },
+  "errInvalidPref": {
+    "message": "Preferência inválida."
+  },
+  "errConfigFirst": {
+    "message": "Configure sua conexão primeiro."
+  },
+  "errInvalidControl": {
+    "message": "Controle inválido."
+  },
+  "errUnknownOp": {
+    "message": "Operação desconhecida."
+  },
+  "errConfigInvalid": {
+    "message": "Configuração inválida."
+  },
+  "errEnterUrl": {
+    "message": "Informe a URL do Zabbix."
+  },
+  "errEnterToken": {
+    "message": "Informe o token de API."
+  },
+  "errUrlRule": {
+    "message": "Informe uma URL HTTPS, sem credenciais, parâmetros ou fragmentos."
+  },
+  "errInterval": {
+    "message": "Intervalo inválido."
+  },
+  "errIncident": {
+    "message": "Incidente inválido."
+  },
+  "errSeverities": {
+    "message": "Selecione pelo menos uma severidade válida."
+  }
+}
