@@ -4,6 +4,8 @@
 
 Extension for Zabbix 7.0 on Chrome, Firefox, Opera, Vivaldi and Brave. The URL starts blank; you provide an API token and a polling interval of 30, 45 or 60 seconds. It needs no intermediate backend and never changes data in Zabbix. The interface is available in English, Brazilian Portuguese and Spanish.
 
+📖 **Documentation:** [project wiki](https://github.com/judsonra/zabbix-notifier/wiki) (English, Português, Español).
+
 ## Install on Chrome
 
 1. Open `chrome://extensions` and enable Developer mode.

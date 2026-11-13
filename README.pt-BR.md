@@ -4,6 +4,8 @@
 
 Extensão para Zabbix 7.0 no Chrome, Firefox, Opera, Vivaldi e Brave. URL inicialmente em branco, token de API e intervalos de 30, 45 ou 60 segundos. Não depende de backend intermediário nem altera dados no Zabbix. A interface está disponível em português (Brasil), inglês e espanhol.
 
+📖 **Documentação:** [wiki do projeto](https://github.com/judsonra/zabbix-notifier/wiki) (English, Português, Español).
+
 ## Instalar no Chrome
 
 1. Abra `chrome://extensions` e habilite o modo do desenvolvedor.
