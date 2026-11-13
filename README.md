@@ -1,100 +1,102 @@
 # Zabbix Notifier
 
-Extensão para Zabbix 7.0 no Chrome, Firefox, Opera, Vivaldi e Brave. URL inicialmente em branco, token de API e intervalos de 30, 45 ou 60 segundos. Não depende de backend intermediário nem altera dados no Zabbix. A interface está disponível em português (Brasil), inglês e espanhol.
+**English** · [Português (Brasil)](README.pt-BR.md) · [Español](README.es.md)
 
-## Instalar no Chrome
+Extension for Zabbix 7.0 on Chrome, Firefox, Opera, Vivaldi and Brave. The URL starts blank; you provide an API token and a polling interval of 30, 45 or 60 seconds. It needs no intermediate backend and never changes data in Zabbix. The interface is available in English, Brazilian Portuguese and Spanish.
 
-1. Abra `chrome://extensions` e habilite o modo do desenvolvedor.
-2. Clique em **Carregar sem compactação** e selecione a pasta `chrome` deste projeto.
-3. Abra o ícone da extensão, informe URL HTTPS, token e intervalo, e clique em **Testar e salvar conexão**.
-4. Autorize o acesso ao servidor informado e permita notificações no sistema operacional.
+## Install on Chrome
 
-## Instalar no Opera, Vivaldi ou Brave
+1. Open `chrome://extensions` and enable Developer mode.
+2. Click **Load unpacked** and select the `chrome` folder of this project.
+3. Open the extension icon, enter an HTTPS URL, a token and an interval, then click **Test and save connection**.
+4. Allow access to the server you entered and allow notifications in your operating system.
 
-Os pacotes usam Manifest V3, com o mesmo código da versão Chrome. Use versões desktop atualizadas, com Chromium 120 ou posterior.
+## Install on Opera, Vivaldi or Brave
 
-| Navegador | Página de extensões | Pasta deste projeto | Pacote ZIP |
+The packages use Manifest V3 with the same code as the Chrome version. Use an up-to-date desktop browser based on Chromium 120 or later.
+
+| Browser | Extensions page | Project folder | ZIP package |
 | --- | --- | --- | --- |
 | Opera | `opera://extensions` | `opera` | `zabbix-notifier-opera.zip` |
 | Vivaldi | `vivaldi://extensions` | `vivaldi` | `zabbix-notifier-vivaldi.zip` |
 | Brave | `brave://extensions` | `brave` | `zabbix-notifier-brave.zip` |
 
-1. Abra a página de extensões do navegador e ative **Modo do desenvolvedor**.
-2. Clique em **Carregar sem compactação** (ou **Load unpacked**) e selecione a pasta correspondente.
-3. Se usar o ZIP, extraia-o primeiro e selecione a pasta que contém `manifest.json`.
-4. Abra a extensão, informe URL HTTPS, token e intervalo, e clique em **Testar e salvar conexão**.
-5. Autorize o acesso ao servidor e permita notificações no sistema operacional.
+1. Open the browser's extensions page and turn on **Developer mode**.
+2. Click **Load unpacked** and select the matching folder.
+3. If you use the ZIP, extract it first and select the folder that contains `manifest.json`.
+4. Open the extension, enter an HTTPS URL, a token and an interval, then click **Test and save connection**.
+5. Allow access to the server and allow notifications in your operating system.
 
-A conexão e as permissões devem ser configuradas separadamente em cada navegador. Os pacotes ainda precisam de validação manual nesses navegadores com um servidor Zabbix real.
+The connection and permissions must be configured separately in each browser. The packages still need manual validation in these browsers against a real Zabbix server.
 
-Referências: [Opera](https://help.opera.com/en/extensions/testing/), [Vivaldi](https://help.vivaldi.com/desktop/appearance-customization/extensions/) e [Brave](https://support.brave.app/hc/en-us/articles/360017909112-How-can-I-add-extensions-to-Brave).
+References: [Opera](https://help.opera.com/en/extensions/testing/), [Vivaldi](https://help.vivaldi.com/desktop/appearance-customization/extensions/) and [Brave](https://support.brave.app/hc/en-us/articles/360017909112-How-can-I-add-extensions-to-Brave).
 
-## Instalar no Firefox
+## Install on Firefox
 
-1. Abra `about:debugging#/runtime/this-firefox`.
-2. Clique em **Carregar extensão temporária** e selecione `firefox/manifest.json`.
-3. Configure a conexão pelo ícone da extensão.
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Click **Load Temporary Add-on** and select `firefox/manifest.json`.
+3. Configure the connection from the extension icon.
 
-A instalação temporária do Firefox termina ao reiniciar o navegador. Instalação permanente e distribuição normal exigem assinatura pela Mozilla; o ZIP incluído ainda não é assinado. Chrome requer versão 120 ou posterior; Firefox requer 140 ou posterior. Os ZIPs são pacotes de distribuição para revisão/publicação, sem credenciais.
+A temporary Firefox installation ends when the browser restarts. Permanent installation and normal distribution require signing by Mozilla; the included ZIP is not signed yet. Chrome requires version 120 or later; Firefox requires 140 or later. The ZIPs are distribution packages for review/publishing and contain no credentials.
 
-## Uso
+## Usage
 
-Em **Configurações → Severidades dos problemas**, selecione quais níveis entram na consulta, lista, contador e notificações. Todas as seis severidades vêm selecionadas, inclusive em conexões antigas. É necessário manter ao menos uma selecionada. Os filtros são salvos automaticamente ao marcar ou desmarcar opções, sem redigitar o token. O painel confirma o salvamento ou informa qualquer falha. Ao tentar desmarcar a última severidade, a opção é mantida selecionada. Ao mudar o filtro, problemas já existentes não geram notificações retroativas.
+Under **Settings → Problem severities**, choose which levels are included in the query, list, counter and notifications. All six severities are selected by default, including on older connections. At least one must stay selected. Filters are saved automatically when you check or uncheck an option, without retyping the token. The panel confirms the save or reports any failure. If you try to uncheck the last severity, it stays selected. When the filter changes, problems that already exist do not trigger retroactive notifications.
 
-A barra de ícones contém, nesta ordem:
+The icon bar contains, in this order:
 
-- **Iniciar/parar verificações automáticas:** o quadrado para as consultas periódicas; o triângulo inicia novamente. A lista anterior permanece visível enquanto pausado. Ao iniciar, a extensão consulta a lista atual sem gerar notificações retroativas.
-- **Atualizar agora:** faz uma consulta manual, inclusive quando as verificações automáticas estão pausadas, sem reativá-las.
-- **Não perturbe:** mantém as consultas, a lista e o contador atualizados, mas bloqueia novas notificações. Os eventos consultados durante o silêncio são registrados para não serem notificados novamente quando o modo for desativado. Não remove notificações já exibidas pelo sistema.
-- **Configurações:** abre ou fecha a conexão e o filtro de problemas suprimidos.
+- **Start/stop automatic checks:** the square stops periodic queries; the triangle starts them again. The previous list stays visible while paused. When started, the extension queries the current list without generating retroactive notifications.
+- **Refresh now:** runs a manual query, even while automatic checks are paused, without re-enabling them.
+- **Do Not Disturb:** keeps queries, the list and the counter up to date but blocks new notifications. Events queried during silence are recorded so they are not notified again when the mode is turned off. It does not remove notifications already shown by the system.
+- **Settings:** opens or closes the connection form and the suppressed-problems filter.
 
-O estado de pausa e de não perturbe é salvo localmente e respeitado ao reabrir o painel ou reiniciar o navegador. Os controles começam com verificações ativas e não perturbe desativado. Os ícones têm descrição ao passar o mouse e nomes acessíveis.
+The pause and Do Not Disturb states are saved locally and respected when the panel is reopened or the browser restarts. Controls start with checks active and Do Not Disturb off. Icons have hover descriptions and accessible names.
 
-- Informe a URL da interface, incluindo subdiretório quando existir, como `https://servidor.exemplo/zabbix/`. Nenhum servidor vem preenchido.
-- Use um token associado a um usuário com acesso de leitura aos hosts e às APIs `problem.get` e `trigger.get`. O monitoramento respeita as permissões desse usuário.
-- Em **Configurações**, a opção **Exibir problemas suprimidos** vem desmarcada, inclusive em conexões anteriores à versão 1.0.1. Nesse padrão, a API exclui problemas suprimidos; eles não entram na lista, no contador nem em novas notificações. Ao marcar, a consulta inclui os suprimidos e a lista os identifica como **Suprimido**.
-- Essa preferência é salva automaticamente ao alterar, sem redigitar o token. **Testar e salvar conexão** também salva a opção. Ao salvar o filtro, a consulta estabelece uma nova referência sem notificar os problemas já existentes. Em caso de falha na consulta, a lista anterior permanece identificada como possivelmente desatualizada até a próxima consulta bem-sucedida.
-- A primeira consulta mostra problemas já existentes sem notificá-los. As seguintes notificam novos problemas. Quando vários chegam juntos, uma notificação resume o lote; a lista contém todos.
-- Clique em uma notificação ou item da lista para abrir os detalhes do evento. A interface web pode exigir seu login normal: o token da extensão não autentica a sessão web.
-- O contador mostra problemas ativos. `!` indica falha; a lista anterior permanece e é identificada como possivelmente desatualizada.
-- O navegador precisa estar em execução. O intervalo é um agendamento solicitado, sem garantia de pontualidade: suspensão, economia de energia e limitação do navegador podem atrasar consultas.
-- Eventos que surgirem e forem resolvidos entre consultas não serão detectados, pois esta versão consulta apenas problemas ativos.
-- O token é guardado no armazenamento local da extensão, sem sincronização e sem criptografia adicional. **Desconectar e apagar token** remove a conexão local; não revoga o token no servidor. Permissões de acesso já concedidas podem ser revogadas na página de gerenciamento da extensão.
-- HTTPS com certificado confiável é obrigatório. O token vai apenas para a API configurada; redirecionamentos são bloqueados. Não há telemetria nem bibliotecas externas.
-- Ao editar a conexão, informe novamente o token. Uma conexão inválida não substitui a conexão anterior.
+- Enter the URL of the web interface, including the subdirectory when there is one, such as `https://server.example/zabbix/`. No server is pre-filled.
+- Use a token tied to a user with read access to the hosts and to the `problem.get` and `trigger.get` APIs. Monitoring respects that user's permissions.
+- Under **Settings**, **Show suppressed problems** is unchecked by default, including on connections created before version 1.0.1. With this default the API excludes suppressed problems; they do not appear in the list, the counter or new notifications. When checked, the query includes suppressed problems and the list marks them as **Suppressed**.
+- This preference is saved automatically when changed, without retyping the token. **Test and save connection** also saves the option. When the filter is saved, the query sets a new baseline without notifying about existing problems. If a query fails, the previous list stays marked as possibly outdated until the next successful query.
+- The first query shows existing problems without notifying about them. Later ones notify about new problems. When several arrive together, one notification summarizes the batch; the list contains all of them.
+- Click a notification or a list item to open the event details. The web interface may require your normal login: the extension's token does not authenticate the web session.
+- The counter shows active problems. `!` indicates a failure; the previous list stays and is marked as possibly outdated.
+- The browser must be running. The interval is a requested schedule with no punctuality guarantee: suspend, power saving and browser throttling may delay queries.
+- Events that appear and are resolved between queries are not detected, because this version queries only active problems.
+- The token is kept in the extension's local storage, without syncing and without extra encryption. **Disconnect and delete token** removes the local connection; it does not revoke the token on the server. Permissions already granted can be revoked on the extension management page.
+- HTTPS with a trusted certificate is required. The token goes only to the configured API; redirects are blocked. There is no telemetry and no external libraries.
+- When editing the connection, enter the token again. An invalid connection does not replace the previous one.
 
-## Atualização 1.0.6
+## Languages
 
-A versão 1.0.6 adiciona suporte a vários idiomas (português do Brasil, inglês e espanhol). As pastas e os ZIPs dela estão em `releases/1.0.6/`, em subpastas `chrome`, `firefox`, `opera`, `vivaldi` e `brave`. Para atualizar uma instalação sem compactação, selecione a pasta do seu navegador dentro de `releases/1.0.6/` ou, se ela já apontar para esse caminho, clique em **Recarregar** na página de extensões. A conexão e as preferências salvas são mantidas.
+The extension uses `chrome.i18n` (also available in Firefox as `browser.i18n`) and follows the browser's language. Available languages: **English** (`en`), **Brazilian Portuguese** (`pt_BR`, the default) and **Spanish** (`es`). If the browser is set to another language, the interface appears in Brazilian Portuguese. This applies to the panel, notifications, error messages, and the extension's name and description on the extensions page. Error messages returned by the Zabbix API itself stay in the server's language.
 
-As pastas `chrome`, `firefox`, `opera`, `vivaldi` e `brave` na raiz do projeto e os ZIPs na raiz continuam em versões anteriores, e as releases anteriores em `releases/` foram preservadas.
+Translations live in `_locales/<language>/messages.json`. To add a language, copy `_locales/en` to a new folder named after the language code (for example `fr`), translate the `message` field of each key, and add the code to the `LOCALES` list in `build-extension.py`. Fixed panel text lives in `popup.html` using the `data-i18n`, `data-i18n-title` and `data-i18n-aria-label` attributes, and dynamic text uses `t('key')` from `src/i18n.ts`. When adding a key, add it to all three languages.
 
-## Idiomas
+## Update 1.0.6
 
-A extensão usa `chrome.i18n` (também disponível no Firefox como `browser.i18n`) e segue o idioma do navegador. Idiomas disponíveis: **português do Brasil** (`pt_BR`, padrão), **inglês** (`en`) e **espanhol** (`es`). Se o navegador estiver em outro idioma, a interface aparece em português do Brasil. Isso vale para o painel, as notificações, as mensagens de erro e o nome e a descrição da extensão na página de extensões. Mensagens de erro devolvidas pela própria API do Zabbix permanecem no idioma do servidor.
+Version 1.0.6 adds multi-language support (English, Brazilian Portuguese and Spanish). Its folders and ZIPs are in `releases/1.0.6/`, in the `chrome`, `firefox`, `opera`, `vivaldi` and `brave` subfolders. To update an unpacked installation, select your browser's folder inside `releases/1.0.6/` or, if it already points to that path, click **Reload** on the extensions page. The saved connection and preferences are kept.
 
-As traduções ficam em `_locales/<idioma>/messages.json`. Para adicionar um idioma, copie `_locales/en` para uma nova pasta com o código do idioma (por exemplo `fr`), traduza o campo `message` de cada chave e inclua o código na lista `LOCALES` de `build-extension.py`. Os textos fixos do painel ficam em `popup.html` com os atributos `data-i18n`, `data-i18n-title` e `data-i18n-aria-label`, e os textos dinâmicos usam `t('chave')`, de `src/i18n.ts`. Ao incluir uma chave, adicione-a nos três idiomas.
+The `chrome`, `firefox`, `opera`, `vivaldi` and `brave` folders at the project root and the ZIPs at the root remain at earlier versions, and earlier releases under `releases/` were preserved.
 
-## Ícones
+## Icons
 
-Os ícones de interface seguem o padrão **Lucide**, com imports centralizados em `src/icons.ts`, tamanho de 20 px e espessura 2. A biblioteca é incluída localmente na build; somente os ícones utilizados entram no pacote. A licença está em `LICENSE-lucide.txt`. A convenção também está registrada na skill pessoal `lucide-icons`.
+Interface icons follow the **Lucide** style, with imports centralized in `src/icons.ts`, 20 px size and stroke width 2. The library is included locally at build time; only the icons in use go into the package. The license is in `LICENSE-lucide.txt`. The convention is also recorded in the personal `lucide-icons` skill.
 
-## Desenvolvimento e validação
+## Development and validation
 
-Os fontes TypeScript ficam em `src/`: `types.ts` define os dados e mensagens, `platform.ts` concentra a API de extensões e o armazenamento, `i18n.ts` fornece os textos traduzidos, `core.ts` valida configurações e links, `background.ts` executa o monitoramento e `popup.ts` controla o painel. Os arquivos `core.js`, `background.js` e `popup.js` na raiz são gerados automaticamente; edite os arquivos TypeScript.
+The TypeScript sources live in `src/`: `types.ts` defines data and messages, `platform.ts` centralizes the extension API and storage, `i18n.ts` provides translated text, `core.ts` validates settings and links, `background.ts` runs the monitoring and `popup.ts` controls the panel. The `core.js`, `background.js` and `popup.js` files at the root are generated automatically; edit the TypeScript files.
 
-Instale as dependências de desenvolvimento com `npm ci`. Execute `npm run build` para validar os tipos em modo estrito e compilar os scripts para os navegadores. Execute `npm test` para compilar e executar os testes TypeScript em `tests/notifier.test.ts`. O script de compilação está em `scripts/build.ts`; as dependências e versões exatas estão no `package-lock.json`.
+Install development dependencies with `npm ci`. Run `npm run build` to check types in strict mode and compile the scripts for the browsers. Run `npm test` to compile and run the TypeScript tests in `tests/notifier.test.ts`. The build script is in `scripts/build.ts`; exact dependencies and versions are in `package-lock.json`.
 
-`npm run package:extensions` compila e gera os cinco pacotes em um novo diretório `releases/1.0.6`. Os navegadores executam apenas o JavaScript compilado, sem dependências externas em tempo de execução. `python3 build-extension.py` gera as pastas `chrome` e `firefox` e seus ZIPs, incluindo `_locales`. Para selecionar os navegadores, use:
+`npm run package:extensions` compiles and generates the five packages in a new directory `releases/1.0.6`. Browsers run only the compiled JavaScript, with no external runtime dependencies. `python3 build-extension.py` generates the `chrome` and `firefox` folders and their ZIPs, including `_locales`. To pick the browsers, use:
 
 ```sh
 python3 build-extension.py --browsers opera vivaldi brave
 ```
 
-Para gerar todos os cinco em uma nova cópia do projeto, use `python3 build-extension.py --browsers chrome firefox opera vivaldi brave`. Por preservação dos arquivos, o gerador recusa destinos existentes; para outra geração use uma nova cópia dos fontes em um diretório vazio.
+To generate all five in a new copy of the project, use `python3 build-extension.py --browsers chrome firefox opera vivaldi brave`. To preserve files, the generator refuses existing destinations; for another run, use a new copy of the sources in an empty directory.
 
-Para gerar em um diretório novo sem substituir pacotes existentes, use `python3 build-extension.py --browsers chrome firefox opera vivaldi brave --output-dir releases/1.0.6`.
+To generate into a new directory without replacing existing packages, use `python3 build-extension.py --browsers chrome firefox opera vivaldi brave --output-dir releases/1.0.6`.
 
-Execute `npm test` para testar configuração, links, polling, filtro de suprimidos, pausa, não perturbe, deduplicação e falhas de rede com APIs simuladas. O comando antigo `node test-notifier.cjs` também encaminha para essa suíte. Esses testes não substituem a validação no navegador e no servidor real.
+Run `npm test` to test configuration, links, polling, the suppressed filter, pause, Do Not Disturb, deduplication and network failures with simulated APIs. The old command `node test-notifier.cjs` also forwards to that suite. These tests do not replace validation in a real browser and against a real server.
 
-Documentação: [API Zabbix 7.0](https://www.zabbix.com/documentation/7.0/en/manual/api), [agendamento Chrome](https://developer.chrome.com/docs/extensions/reference/api/alarms), [background Chrome/Firefox](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/background).
+Documentation: [Zabbix 7.0 API](https://www.zabbix.com/documentation/7.0/en/manual/api), [Chrome alarms](https://developer.chrome.com/docs/extensions/reference/api/alarms), [Chrome/Firefox background](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/background).
